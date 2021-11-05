@@ -6,11 +6,39 @@ $dbname = 'world';
 
 $conn = new PDO("mysql:host=$host;dbname=$dbname;charset=utf8mb4", $username, $password);
 $cntry=$_GET['country'];
-$stmt = $conn->query("SELECT * FROM countries WHERE name LIKE '%$cntry%'");
+if(isset($_GET['context'])){
+  $stmt = $conn->query("SELECT cities.name, cities.district, cities.population FROM cities JOIN countries ON cities.country_code=countries.code WHERE countries.name LIKE '%$cntry%'");
+  $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
+ 
+}
+else{
+  $stmt = $conn->query("SELECT * FROM countries WHERE name LIKE '%$cntry%'");
+  $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
+}
+//$results = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-$results = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 ?>
+<?php if(isset($_GET['context'])){ ?>
+  <table>
+  <thead>
+    <th>Name</th>
+    <th>District</th>
+    <th>Population</th>
+  </thead>
+  <tbody>
+    <?php foreach ($results as $row): ?>
+    <tr>
+      <td><?= $row['name'];?></td> 
+      <td><?= $row['district'];?></td>
+      <td><?= $row['population']; ?></td>
+    </tr>
+  <?php endforeach; ?>
+  </tbody> 
+</table>
+<?php } ?>
+
+<?php if (!isset($_GET['context'])){ ?>
 <table>
   <thead>
     <th>Name</th>
@@ -29,5 +57,6 @@ $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
   <?php endforeach; ?>
   </tbody> 
 </table>
+<?php } ?>
 
 
