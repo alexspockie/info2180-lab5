@@ -1,3 +1,4 @@
+<style><?php include 'world.css'; ?></style>
 <?php
 $host = 'localhost';
 $username = 'lab5_user';
@@ -6,13 +7,18 @@ $dbname = 'world';
 
 $conn = new PDO("mysql:host=$host;dbname=$dbname;charset=utf8mb4", $username, $password);
 $cntry=$_GET['country'];
+$cntry="%$cntry%";   // have to do this in order to get the query with LIKE to work
+//$cntry=htmlspecialchars($cntry);
 if(isset($_GET['context'])){
-  $stmt = $conn->query("SELECT cities.name, cities.district, cities.population FROM cities JOIN countries ON cities.country_code=countries.code WHERE countries.name LIKE '%$cntry%'");
+  $stmt = $conn->prepare("SELECT cities.name, cities.district, cities.population FROM cities JOIN countries ON cities.country_code=countries.code WHERE countries.name LIKE ?");
+  
+  $stmt->execute([$cntry]);
   $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
  
 }
 else{
-  $stmt = $conn->query("SELECT * FROM countries WHERE name LIKE '%$cntry%'");
+  $stmt = $conn->prepare("SELECT * FROM countries WHERE name LIKE ?");
+  $stmt->execute([$cntry]);
   $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
 }
 //$results = $stmt->fetchAll(PDO::FETCH_ASSOC);

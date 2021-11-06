@@ -1,1 +1,91 @@
 /* Add your own styles */
+html{
+	background-color: #f7f7f7;
+	 font-family: -apple-system, BlinkMacSystemFont, "Segoe UI",Roboto,"Helvetica Neue",Arial, "Noto Sans", sans-serif;
+    font-size: 18px;  
+}
+header{
+	background-color: #275091;
+	padding: 30px;
+	display: flex;
+	color: white;
+	justify-content: center;
+}
+h1{
+	padding-left: 15px;
+}
+img{
+	width: 100px;
+	height: 100px;
+	}
+main{
+	padding: 30px;
+	display: flex;
+	flex-direction: column;
+	/*align-items: center;*/
+}
+#controls{
+	display: flex;
+	justify-content: center;
+	padding: 20px;
+}
+label{
+	margin: 5px;
+	display: none;
+}
+#country{
+	width: 60%;
+	height: 40px;
+	border: 2px solid lightgray;
+	border-radius: 10px;
+}
+button{
+	margin-left:10px;
+	color: white;
+	border:  2px solid;
+	border-radius: 5px;
+	outline: none;
+	color: white;
+	height: 38px;
+	width: 150px;
+	font-size: 16px;
+}
+#lookup{	
+	background-color:#3535e0 ;
+	border-color: #3535e0;
+	
+}
+#lookupc{
+	background-color: #2bb52b;
+	border-color:#2bb52b ;
+}
+#result{
+	padding: 20px;
+	display: flex;
+	justify-content: center;
+
+	
+}
+table{
+	border-collapse: collapse;
+	
+}
+tr:nth-child(even){
+	background-color: #f2f2f2;
+}
+tr:hover{
+	background-color: #d8f6d8;
+}
+td{
+	border: 1px solid #ddd;
+	padding-left: 10px;
+	padding-right: 20px;
+	padding-top: 5px;
+	padding-bottom: 5px;
+}
+th{
+	text-align: left;
+	padding: 10px;
+	background-color: #d8f6d8;
+	border: 1px solid #ddd;
+}
